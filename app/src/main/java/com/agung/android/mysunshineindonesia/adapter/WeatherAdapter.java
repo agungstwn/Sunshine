@@ -1,11 +1,13 @@
 package com.agung.android.mysunshineindonesia.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.agung.android.mysunshineindonesia.activity.DetailWeatherActivity;
 import com.agung.android.mysunshineindonesia.viewholder.WeatherViewHolder;
 
 /**
@@ -34,5 +36,7 @@ public class WeatherAdapter extends RecyclerView.Adapter implements WeatherViewH
     public void onWeatherClick(WeatherViewHolder holder) {
         Toast.makeText(holder.itemView.getContext()
                 , "Ini item ke " + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(holder.itemView.getContext(), DetailWeatherActivity.class);
+        holder.itemView.getContext().startActivity(intent);
     }
 }
