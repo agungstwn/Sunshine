@@ -15,6 +15,8 @@ import com.agung.android.mysunshineindonesia.viewholder.WeatherViewHolder;
  */
 
 public class WeatherAdapter extends RecyclerView.Adapter implements WeatherViewHolder.WeatherCallback {
+
+    private String[] mWeatherData;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate
@@ -38,5 +40,10 @@ public class WeatherAdapter extends RecyclerView.Adapter implements WeatherViewH
                 , "Ini item ke " + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(holder.itemView.getContext(), DetailWeatherActivity.class);
         holder.itemView.getContext().startActivity(intent);
+    }
+
+    public void setWeatherData(String[] weatherData) {
+        mWeatherData = weatherData;
+        notifyDataSetChanged();
     }
 }

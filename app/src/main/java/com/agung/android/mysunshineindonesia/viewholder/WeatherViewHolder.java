@@ -23,16 +23,13 @@ public class WeatherViewHolder extends RecyclerView.ViewHolder implements View.O
     TextView mWeatherDesc;
     @BindView(R.id.tv_weather_item_temp)
     TextView mWeatherTemp;
+
     private final WeatherCallback callback;
     private static int WeatherLayout = R.layout.view_holder_weather;
 
     public WeatherViewHolder(View itemView, WeatherCallback callback) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-//        mWeatherImage = (ImageView)itemView.findViewById(R.id.iv_weather_item_image);
-//        mWeatherDate = (TextView)itemView.findViewById(R.id.tv_weather_item_date);
-//        mWeatherDesc = (TextView) itemView.findViewById(R.id.tv_weather_desc);
-//        mWeatherTemp = (TextView) itemView.findViewById(R.id.tv_weather_item_temp);
         this.callback = callback;
 
         itemView.setOnClickListener(this);

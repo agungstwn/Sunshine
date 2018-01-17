@@ -4,4 +4,7 @@
     <string name="main_weather_desc">Moderate Rain</string>
     <string name="main_weather_temp">17°</string>
     <string name="degree">°</string>
+    <string name="share">Share</string>
+    <string name="refresh">Refresh</string>
+    <string name="action_map">Map Location</string>
 </resources>

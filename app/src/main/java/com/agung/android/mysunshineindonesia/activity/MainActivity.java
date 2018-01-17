@@ -1,14 +1,17 @@
 package com.agung.android.mysunshineindonesia.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.agung.android.mysunshineindonesia.R;
 import com.agung.android.mysunshineindonesia.adapter.WeatherAdapter;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     private WeatherAdapter weatherAdapter;
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
     }
+
 
     private void initView() {
         ButterKnife.bind(this);
@@ -57,17 +63,51 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuInflater menuInflater = getMenuInflater();
+
+        menuInflater.inflate(R.menu.main_menu, menu);
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_setting) {
-            Toast.makeText(this, "Ini Menu Setting", Toast.LENGTH_SHORT).show();
+        int id = item.getItemId();
+
+        if (id == R.id.action_refresh) {
+            weatherAdapter.setWeatherData(null);
+            loadWeatherData();
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
+        }
+        if (id == R.id.action_map) {
+            openLocationMap();
+            return true;
+        }
+
+//        if (item.getItemId() == R.id.action_setting) {
+//            Toast.makeText(this, "Ini Menu Setting", Toast.LENGTH_SHORT).show();
+//            return true;
+//        } else {
+        return super.onOptionsItemSelected(item);
+//
+    }
+
+    private void openLocationMap() {
+        String addressString =  "1600 Amphitheather Parkway, CA";
+        Uri geoLocation = Uri.parse("geo:0,0?q=" + addressString);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }else {
+            Log.d(TAG, "Couldn't call " + geoLocation.toString()
+                    + ", no receiving apps installed!");
         }
     }
+
+    private void loadWeatherData() {
+    }
+
 }
